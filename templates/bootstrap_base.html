@@ -8,13 +8,13 @@
     <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="{{ STATIC_URL }}example_bootstrap.css" type='text/css'>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css" type='text/css'>
 
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/i18n/jquery-ui-i18n.min.js"></script>
-    <script src="http://yandex.st/json2/2011-01-18/json2.min.js"></script>
+    <script src="http://yandex.st/json3/2011-01-18/json2.min.js"></script>
     <script src="{{ STATIC_URL }}csrf.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}pybb/js/pybbjs.js"></script>
     <style type="text/css">
@@ -32,10 +32,12 @@
 <body>
 
 <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="brand" href="/">PYBB Modified. Django forum solution.</a>
-            <ul class="nav">
+   <div class="container"> 
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">PYBB Modified. Django forum solution.</a>
+	</div>
+	<div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
                 {% if request.user.is_authenticated %}
                     <li>
                         <a href="{% url 'pybb:edit_profile' %}">Profile [logged as {{ request.user.username }}]</a>
