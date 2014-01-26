@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css" type='text/css'>
 
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css" type="text/css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery-1.11.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/i18n/jquery-ui-i18n.min.js"></script>
     <script src="http://yandex.st/json3/2011-01-18/json2.min.js"></script>
@@ -22,6 +22,14 @@
             padding-top: -60px;
         }
     </style>
+    <script>
+	$(document).ready(function(){
+		$("select").addClass("form-control");
+		$("textarea").addClass("form-control");
+		$("input[type='text']").addClass("form-control");
+		$("input[type='password']").addClass("form-control");
+	});
+    </script>	
     {% block extra_style %}{% endblock %}
 
     <title>{% block title %}{% endblock %}</title>
