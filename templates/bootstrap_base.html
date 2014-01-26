@@ -89,9 +89,11 @@
         {% endif %}
         {% if request.path != '/' %}
             <div id="breadcrumb">
+		<ol class="breadcrumb">
                 {% block breadcrumb %}
-                    <a href="/">Main</a>
+                    <li><a href="/">Main</a></li>
                 {% endblock breadcrumb %}
+		</ol>
             </div>
         {% endif %}
         {% if request.path == '/' %}
