@@ -1,3 +1,4 @@
+from django.views.generic import TemplateView
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
@@ -11,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^forum/', include('pybb.urls', namespace='pybb')),
     url(r'^accounts/', include('registration.urls')),
+    url(r'^$', TemplateView.as_view(template_name='index.html')),
 )
 
 urlpatterns += patterns('django.views.static', (r'^static/(?P<path>.*)$'
