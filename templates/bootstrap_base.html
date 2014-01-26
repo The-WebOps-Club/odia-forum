@@ -70,7 +70,7 @@
 <div class="container">
 
     <!-- Main hero unit for a primary marketing message or call to action -->
-    <div class="hero-unit">
+    <div class="jumbotron">
         {% if messages %}
             <ul class="messages">
                 {% for message in messages %}
@@ -79,7 +79,7 @@
             </ul>
         {% endif %}
         {% if request.path != '/' %}
-            <div id="breadcrumb">
+            <div id="breadcrumb" class="breadcrumb">
                 {% block breadcrumb %}
                     <a href="/">Main</a>
                 {% endblock breadcrumb %}
@@ -97,20 +97,20 @@
     </div>
     {% if request.path == '/' %}
     <div class="row">
-        <div class="span5">
+        <div class="col-md-5">
             <h2>Fully Documented</h2>
             <p>Everything explained</p>
-            <p><a class="btn" href="http://readthedocs.org/docs/pybbm/en/latest/">Read docs now &raquo;</a></p>
+            <p><a class="btn btn-default" href="http://readthedocs.org/docs/pybbm/en/latest/">Read docs now &raquo;</a></p>
         </div>
-        <div class="span5">
+        <div class="col-md-5">
             <h2>Heavily tested</h2>
             <p> 95% code coverage!</p>
-            <p><a class="btn" href="https://github.com/hovel/pybbm/blob/master/pybb/tests.py">View tests &raquo;</a></p>
+            <p><a class="btn btn-default" href="https://github.com/hovel/pybbm/blob/master/pybb/tests.py">View tests &raquo;</a></p>
         </div>
-        <div class="span5">
+        <div class="col-md-5">
             <h2>Want a fast start?</h2>
             <p>Start from ready to use example project</p>
-            <p><a class="btn" href="http://readthedocs.org/docs/pybbm/en/latest/example.html">Read more &raquo;</a></p>
+            <p><a class="btn btn-default" href="http://readthedocs.org/docs/pybbm/en/latest/example.html">Read more &raquo;</a></p>
         </div>
     </div>
 
