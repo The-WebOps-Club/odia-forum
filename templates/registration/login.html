@@ -10,16 +10,16 @@
 
     <h2>Login on site</h2>
 
-    <form action='' method=POST class="form-stacked">
+    <form action='' method=POST class="form form-horizontal">
     <table>
             {{form.as_p}}
     </table>
     {% csrf_token %}
-       <input type="submit">
+       <input class="btn btn-primary" type="submit">
     </form>
 
     <p>
-        <b>Don't have an account?</b> <a href="{% url 'registration_register' %}">Register</a>
+        <strong>Don't have an account?</strong> <a href="{% url 'registration_register' %}">Register</a>
     </p>
 
 {% endblock %}

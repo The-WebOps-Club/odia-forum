@@ -9,10 +9,10 @@
 
     <h2>Register</h2>
 
-    <form action='' method=POST class="form-stacked">
+    <form action='' method=POST class="form horizontal">
     {{ form.as_p }}
     {% csrf_token %}
-	<input type=submit>
+	<input class="btn btn-primary" type=submit>
     </form>
 
 {% endblock %}
