@@ -16,7 +16,7 @@
     </thead>
     <tbody>
     <tr class="post-row">
-        <td class="post-info">
+        <td class="col-md-3 post-info">
             {% include "pybb/avatar.html" with user=post.user %}
 
             <div class="post-author"><a href="{{ post_user_profile.get_absolute_url }}"><span class="post-username">{{ post.user.username }}</span></a></div>
@@ -52,7 +52,7 @@
 
             </div>
         </td>
-        <td class="post-content">
+        <td class="col-md-9 post-content">
             {{ post.body_html|safe }}
 
             {% if not user.is_authenticated or user_profile.show_signatures %}
