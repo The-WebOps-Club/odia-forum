@@ -11,7 +11,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^forum/', include('pybb.urls', namespace='pybb')),
-    url(r'^accounts/', include('registration.urls')),
+    url(r'^accounts/', include('accounts.urls')),
     url(r'^$', TemplateView.as_view(template_name='index.html')),
 )
 
