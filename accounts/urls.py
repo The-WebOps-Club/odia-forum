@@ -22,9 +22,10 @@ from django.conf.urls import include
 from django.conf.urls import url
 from django.views.generic.base import TemplateView
 
-from accounts.views import AccountActivationView as ActivationView
+#from accounts.views import AccountActivationView as ActivationView
 from accounts.views import AccountRegistrationView as RegistrationView
 from accounts.views import AccountEditView
+from registration.backends.default.views import ActivationView
 
 urlpatterns = patterns('',
                        url(r'^activate/complete/$',
@@ -34,9 +35,12 @@ urlpatterns = patterns('',
                        # [a-fA-F0-9]{40} because a bad activation key should still get to the view;
                        # that way it can return a sensible "invalid key" message instead of a
                        # confusing 404.
+					   
+					   
                        url(r'^activate/(?P<activation_key>\w+)/$',
                            ActivationView.as_view(),
                            name='registration_activate'),
+					   
                        url(r'^register/$',
                            RegistrationView.as_view(),
                            name='registration_register'),
