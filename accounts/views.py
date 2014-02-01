@@ -2,11 +2,13 @@ from django.shortcuts import render
 from django.views.generic.edit import UpdateView
 # Create your views here.
 
-from registration.backends.default.views import ActivationView, RegistrationView
+from registration.backends.default.views import RegistrationView
 from accounts.forms import DetailForm
 from accounts.models import UserData
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
+from django.http import HttpResponse
 
 # Create your models here.
 
@@ -15,19 +17,22 @@ permission_lists = {'test':['pybb.add_post','pybb.view_post']}
 class AccountRegistrationView(RegistrationView):
 	form_class = DetailForm
 	def register(self, request, **cleaned_data):
+		
 		user = super(AccountRegistrationView, self).register(request, **cleaned_data)
 		user.groups.add(cleaned_data['group'])
 		user_profile = UserData(user = user)
 		user_profile.save()
 		return user
 	
-class AccountActivationView(ActivationView):
-	pass
+	
+	
+#class AccountActivationView(ActivationView):
+#	pass
 	
 class AccountEditView(UpdateView):
 
 	model = UserData
-	fields = ['address', 'institute', 'hostel_bool', 'hostel','department','batchof','course','graduation_date']
+	fields = ['address', 'institute', 'hostel_bool', 'hostel','department','batchof','course']
 	template_name = "registration/registration-form.html"
 	
 	def dispatch(self, request, *args, **kwargs):
