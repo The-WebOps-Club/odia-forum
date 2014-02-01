@@ -46,6 +46,9 @@ INSTALLED_APPS = (
     'south',
     'pure_pagination',
 	'accounts',
+    'portal',
+    'dajax',
+    'dajaxice',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -93,6 +96,21 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     'pybb.context_processors.processor',
 )
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.eggs.Loader',
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'dajaxice.finders.DajaxiceFinder',
+)
+
+DAJAXICE_MEDIA_PREFIX = 'dajaxice'
+
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
