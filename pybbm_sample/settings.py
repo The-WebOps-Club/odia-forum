@@ -45,7 +45,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'south',
     'pure_pagination',
-	'accounts'
+	'accounts',
 )
 
 MIDDLEWARE_CLASSES = (
