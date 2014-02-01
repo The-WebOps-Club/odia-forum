@@ -106,7 +106,9 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 ACCOUNT_ACTIVATION_DAYS = 1
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 465
+EMAIL_HOST = 'mail.thewebopsclub.org'
+EMAIL_PORT = 25
 EMAIL_USE_TLS = True
 # Username & password in local_settings
+DEFAULT_FROM_EMAIL = 'The WebOps Club IITM <no-reply@thewebopsclub.org>'
+LOGIN_REDIRECT_URL = SITE_URL + 'forum/'

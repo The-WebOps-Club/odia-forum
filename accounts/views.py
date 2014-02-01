@@ -13,17 +13,16 @@ from django.core.urlresolvers import reverse
 permission_lists = {'test':['pybb.add_post','pybb.view_post']}
 
 class AccountRegistrationView(RegistrationView):
-	form_class = DetailForm;
+	form_class = DetailForm
 	def register(self, request, **cleaned_data):
-		user = super(AccountRegistrationView, self).register(request, **cleaned_data);
+		user = super(AccountRegistrationView, self).register(request, **cleaned_data)
 		user.groups.add(cleaned_data['group'])
-		user_profile = UserData()
-		user_profile.user = user
+		user_profile = UserData(user = user)
 		user_profile.save()
-		return user;
+		return user
 	
 class AccountActivationView(ActivationView):
-	pass;
+	pass
 	
 class AccountEditView(UpdateView):
 
