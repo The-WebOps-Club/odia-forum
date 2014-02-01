@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from portal.models import *
 from django.template import RequestContext
 from django.contrib.admin.views.decorators import staff_member_required
@@ -15,4 +15,4 @@ def index(request):
 	if request.user.is_staff:
 		return dashboard(request)
 	else:
-		return HttpResponse('<h4>Home pge is here!</h4> ')
+		return HttpResponseRedirect('forum/')
