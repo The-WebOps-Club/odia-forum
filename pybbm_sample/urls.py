@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^forum/', include('pybb.urls', namespace='pybb')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^dashboard/', 'portal.views.dashboard'),
-    url(r'^$', TemplateView.as_view(template_name='index.html')),
+    url(r'^$', 'portal.views.index'),
     url(r'^%s/' % settings.DAJAXICE_MEDIA_PREFIX, include('dajaxice.urls')),
 
 )
