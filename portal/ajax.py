@@ -5,13 +5,6 @@ from portal.forms import *
 from django.template.context import RequestContext
 from dajaxice.utils import deserialize_form
 from models import *
-
-@dajaxice_register
-def change_color(request):
-	dajax=Dajax()
-	dajax.script("$('#sample').css('background-color','red');")
-	return dajax.json()
-	
 	
 @dajaxice_register
 def add_event(request):
@@ -40,14 +33,6 @@ def save_event(request, form):
 	success_html = '<h6>added event successfully</h6>'
 	dajax.assign('#add_event', 'innerHTML', success_html)
 	return reload_events(dajax)
-	
-@dajaxice_register
-def test(request):
-	print 'test running'
-	dajax = Dajax()
-	test_html = '<h2>This is a</h2><h4> test message</h4>'
-	dajax.assign('#add_event', 'innerHTML', test_html)
-	return dajax.json()
 	
 @dajaxice_register
 def delete_event(request, event_id):
