@@ -1,16 +1,18 @@
 {% load staticfiles %}	
 	
-<html>	
+<html>
+
 <body> 
 	<div>
-	<form id='f1' method=post >
+	<form id='f1' >
 	{% csrf_token %}
 		<table>
 		    {{ add_event_form.as_table }}				
 		<tr>
 			<th></th>
 			<td>
-				<a onclick="Dajaxice.portal.save_event(Dajax.process, {'form':$('#f1').serialize(true)})" >Save</a>
+				<a class='btn btn-primary btn-xs' onclick="if(change_input()) Dajaxice.portal.save_event(Dajax.process, {'form':$('#f1').serialize(true)})" >Save</a>
+				<a onclick='cancel()' class='btn btn-danger btn-xs'>Cancel</a>
 			</td>
 		</tr>
 		</table>

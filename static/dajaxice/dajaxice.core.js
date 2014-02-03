@@ -49,14 +49,6 @@ var Dajaxice = {
         return Dajaxice.call('portal.delete_update', 'POST', callback_function, argv, custom_settings);
     },
 
-    test: function(callback_function, argv, custom_settings){
-        return Dajaxice.call('portal.test', 'POST', callback_function, argv, custom_settings);
-    },
-
-    change_color: function(callback_function, argv, custom_settings){
-        return Dajaxice.call('portal.change_color', 'POST', callback_function, argv, custom_settings);
-    },
-
     edit_update: function(callback_function, argv, custom_settings){
         return Dajaxice.call('portal.edit_update', 'POST', callback_function, argv, custom_settings);
     },

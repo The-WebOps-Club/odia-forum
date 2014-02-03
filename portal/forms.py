@@ -1,5 +1,6 @@
 from django import forms
 from portal.models import *
+from django.contrib.admin import widgets
 
 class AddEventForm(forms.ModelForm):
 	#name = forms.CharField(max_length=30)

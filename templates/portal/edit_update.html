@@ -10,7 +10,8 @@
 		<tr>
 			<th></th>
 			<td>
-				<a onclick="Dajaxice.portal.save_edited_update(Dajax.process, {'form':$('#f1').serialize(true), 'update_id': {{ id }} })" >Save</a>
+				<a class='btn btn-primary btn-xs' onclick="if(change_input()) Dajaxice.portal.save_edited_update(Dajax.process, {'form':$('#f1').serialize(true), 'update_id': {{ id }} })" >Save</a>
+				<a onclick='cancel()' class='btn btn-danger btn-xs'>Cancel</a>
 			</td>
 		</tr>
 		</table>

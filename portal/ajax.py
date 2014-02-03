@@ -12,7 +12,8 @@ def add_event(request):
 	form_add_event = AddEventForm()
 	cont_dict = {'add_event_form':form_add_event}
 	html_add_event = render_to_string('portal/add_event.html', cont_dict, RequestContext(request))
-	dajax.assign('#add_event','innerHTML',html_add_event)
+	dajax.assign('#add_event','innerHTML',html_add_event) 
+	dajax.script('change_type()')	
 	return dajax.json()
 
 @dajaxice_register
@@ -51,6 +52,7 @@ def edit_event(request, event_id):
 	cont_dict = {'edit_event_form':form, 'id' : event.id }
 	html_add_event = render_to_string('portal/edit_event.html', cont_dict, RequestContext(request))
 	dajax.assign('#add_event','innerHTML',html_add_event)
+	dajax.script('change_editform()')
 	return dajax.json()
 	
 @dajaxice_register
@@ -79,6 +81,7 @@ def add_update(request):
 	cont_dict = {'add_update_form':form_add_update}
 	html_add_update = render_to_string('portal/add_update.html', cont_dict, RequestContext(request))
 	dajax.assign('#add_event','innerHTML',html_add_update)
+	dajax.script('change_type()')
 	return dajax.json()
 	
 @dajaxice_register
@@ -88,7 +91,7 @@ def save_update(request, form):
 	if res is None or not res.is_valid():
 		cont_dict = {'add_update_form':res}
 		html_add_update = render_to_string('portal/add_update.html', cont_dict, RequestContext(request))
-		dajax.assign('#add_update','innerHTML',html_add_update)
+		dajax.assign('#add_event','innerHTML',html_add_update)
 		return dajax.json()		
 	til = res.cleaned_data['title']
 	dat = res.cleaned_data['date_time']
@@ -116,6 +119,7 @@ def edit_update(request, update_id):
 	cont_dict = {'edit_update_form':form, 'id' : update.id }
 	html_add_update = render_to_string('portal/edit_update.html', cont_dict, RequestContext(request))
 	dajax.assign('#add_event','innerHTML',html_add_update)
+	dajax.script('change_editform()')
 	return dajax.json()
 	
 @dajaxice_register

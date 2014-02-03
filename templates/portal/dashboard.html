@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		{% block title %} Odia | Dashboard {% endblock %}
+		{% block title %}Dashboard{% endblock %}
 		
 		{% block head %} 
 			{% dajaxice_js_import %}
@@ -16,7 +16,7 @@
 				position:fixed;
 				top:10px;
 				right:100px;
-				background-color:#FACFCF;
+				background-color:pink;
 			}
 			#add_event #submit {
 				float:right;
@@ -31,6 +31,37 @@
 		    $(document).ready(function(){
 				Dajaxice.portal.reload(Dajax.process)
 			});
+			
+			function change_type() {
+				$('#id_date_time').prop('type', 'datetime-local');
+			}
+			
+			function change_input() {
+				value = $('#id_date_time').val();
+				value = value.replace('T',' ');
+				$('#id_date_time').prop('type', 'datetime');
+				$('#id_date_time').val(value);
+				return true;
+			}
+			
+			function confirm_deletion() {
+				if (confirm('Are you sure you want to delete this entry?')){
+					return true;
+				}				
+				else return false;
+			}
+			
+			function cancel() {
+				$('#add_event').html('');
+			}
+			
+			function change_editform() {
+				value = $('#id_date_time').val();
+				value = value.replace(' ','T');
+				$('#id_date_time').prop('type', 'datetime-local');
+				$('#id_date_time').val(value);
+			}
+			
 		{% endblock %}
 	</head>
 	

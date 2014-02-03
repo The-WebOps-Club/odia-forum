@@ -7,8 +7,8 @@
 		<td> {{ e.date_time }} </td>
 		<td> {{ e.update }} </td>
 		<td>
-			<button onclick="Dajaxice.portal.edit_update(Dajax.process, {'update_id': {{e.id }} })">Edit</button>
-			<button onclick="Dajaxice.portal.delete_update(Dajax.process, {'update_id': {{ e.id }} })">Delete</button>
+			<button class='btn btn-warning btn-xs' onclick="Dajaxice.portal.edit_update(Dajax.process, {'update_id': {{e.id }} })">Edit</button>
+			<button class='btn btn-danger btn-xs' onclick="if(confirm_deletion()) Dajaxice.portal.delete_update(Dajax.process, {'update_id': {{ e.id }} })">Delete</button>
 		</td>
 		</tr>
 		{% endfor %}
