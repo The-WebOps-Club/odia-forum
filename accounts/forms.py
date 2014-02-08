@@ -23,7 +23,7 @@ courses = (
 
 mail_hosts = ['smail.iitm.ac.in']
 class DetailForm(forms.Form):
-	# basic data.
+	# basic data.git 
 	
 	
 	username = forms.RegexField(regex=r'^[\w.@+-]+$', max_length=30, label=_("Username"), error_messages={'invalid': _("This value may contain only letters, numbers and @/./+/-/_ characters.")})
