@@ -12,7 +12,5 @@ def dashboard(request):
 	return render_to_response('portal/dashboard.html', rc)
 
 def index(request):
-	if request.user.is_staff:
-		return dashboard(request)
-	else:
-		return HttpResponseRedirect('forum/')
+
+	return render_to_response('home.html', locals(), context_instance = RequestContext(request))
