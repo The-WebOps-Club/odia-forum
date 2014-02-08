@@ -12,7 +12,7 @@ def add_event(request):
 	form_add_event = AddEventForm()
 	cont_dict = {'add_event_form':form_add_event}
 	html_add_event = render_to_string('portal/add_event.html', cont_dict, RequestContext(request))
-	dajax.assign('#add_event','innerHTML',html_add_event) 
+	dajax.assign('#add_event_form','innerHTML',html_add_event) 
 	dajax.script('change_type()')	
 	return dajax.json()
 
@@ -32,7 +32,8 @@ def save_event(request, form):
 	new_event = Event(name = nam, description = des, date_time = dat, location = loc)
 	new_event.save()
 	success_html = '<h6>added event successfully</h6>'
-	dajax.assign('#add_event', 'innerHTML', success_html)
+	dajax.assign('#event_notif', 'innerHTML', success_html)
+	dajax.script("$('#f1')[0].reset()")
 	return reload_events(dajax)
 	
 @dajaxice_register
@@ -51,8 +52,9 @@ def edit_event(request, event_id):
 	form = AddEventForm(instance = event)
 	cont_dict = {'edit_event_form':form, 'id' : event.id }
 	html_add_event = render_to_string('portal/edit_event.html', cont_dict, RequestContext(request))
-	dajax.assign('#add_event','innerHTML',html_add_event)
-	dajax.script('change_editform()')
+	id = '#event'+str(event_id)
+	dajax.assign(id,'innerHTML',html_add_event)
+	dajax.script("$('#div_events th').hide()")
 	return dajax.json()
 	
 @dajaxice_register
@@ -62,7 +64,8 @@ def save_edited_event(request, form, event_id):
 	if res is None or not res.is_valid():
 		cont_dict = {'edit_event_form':res}
 		html_add_event = render_to_string('portal/edit_event.html', cont_dict, RequestContext(request))
-		dajax.assign('#add_event','innerHTML',html_add_event)
+		id = '#event'+str(event_id)
+		dajax.assign(id,'innerHTML',html_add_event)
 		return dajax.json()		
 	event = Event.objects.get(id = event_id)
 	event.name = res.cleaned_data['name']	
@@ -71,7 +74,7 @@ def save_edited_event(request, form, event_id):
 	event.location = res.cleaned_data['location']
 	event.save()
 	success_html = '<h6>event edited</h6>'
-	dajax.assign('#add_event', 'innerHTML', success_html)
+	dajax.assign('#event_notif', 'innerHTML', success_html)
 	return reload_events(dajax)
 	
 @dajaxice_register
@@ -80,7 +83,7 @@ def add_update(request):
 	form_add_update = AddUpdateForm()
 	cont_dict = {'add_update_form':form_add_update}
 	html_add_update = render_to_string('portal/add_update.html', cont_dict, RequestContext(request))
-	dajax.assign('#add_event','innerHTML',html_add_update)
+	dajax.assign('#add_update_form','innerHTML',html_add_update)
 	dajax.script('change_type()')
 	return dajax.json()
 	
@@ -91,7 +94,7 @@ def save_update(request, form):
 	if res is None or not res.is_valid():
 		cont_dict = {'add_update_form':res}
 		html_add_update = render_to_string('portal/add_update.html', cont_dict, RequestContext(request))
-		dajax.assign('#add_event','innerHTML',html_add_update)
+		dajax.assign('#add_update_form','innerHTML',html_add_update)
 		return dajax.json()		
 	til = res.cleaned_data['title']
 	dat = res.cleaned_data['date_time']
@@ -99,7 +102,8 @@ def save_update(request, form):
 	new_update = Update(title = til,date_time = dat, update = upd)
 	new_update.save()
 	success_html = '<h6>added update successfully</h6>'
-	dajax.assign('#add_event', 'innerHTML', success_html)
+	dajax.assign('#update_notif', 'innerHTML', success_html)
+	dajax.script("$('#f2')[0].reset()")
 	return reload_updates(dajax)
 	
 @dajaxice_register
@@ -118,8 +122,9 @@ def edit_update(request, update_id):
 	form = AddUpdateForm(instance = update)
 	cont_dict = {'edit_update_form':form, 'id' : update.id }
 	html_add_update = render_to_string('portal/edit_update.html', cont_dict, RequestContext(request))
-	dajax.assign('#add_event','innerHTML',html_add_update)
-	dajax.script('change_editform()')
+	id = '#update'+str(update_id)
+	dajax.assign(id,'innerHTML','<div id="div"'+html_add_update)
+	dajax.script("$('#div_updates th').hide()")
 	return dajax.json()
 	
 @dajaxice_register

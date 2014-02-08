@@ -1,8 +1,8 @@
 
 <table class='table table-bordered table-hover' id='table_updates'>
 {% for e in updates %}
-<tr>
-<th> {{ e.title }} </th>
+<tr id='update{{ e.id }}'>
+<td><strong> {{ e.title }} </strong></td>
 <td> {{ e.date_time }} </td>
 <td> {{ e.update }} </td>
 <td>
