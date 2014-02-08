@@ -28,7 +28,7 @@ class DetailForm(forms.Form):
 	
 	username = forms.RegexField(regex=r'^[\w.@+-]+$', max_length=30, label=_("Username"), error_messages={'invalid': _("This value may contain only letters, numbers and @/./+/-/_ characters.")})
 	first_name = forms.RegexField(regex=r'^[\w.@+-]+$', max_length=50, label=_("First Name"), error_messages={'invalid': _("This value may contain only letters, numbers and @/./+/-/_ characters.")})
-	last_name = RegexField(regex=r'^[\w.@+-]+$', max_length=50, label=_("Last Name"), error_messages={'invalid': _("This value may contain only letters, numbers and @/./+/-/_ characters.")})
+	last_name = forms.RegexField(regex=r'^[\w.@+-]+$', max_length=50, label=_("Last Name"), error_messages={'invalid': _("This value may contain only letters, numbers and @/./+/-/_ characters.")})
 	email = forms.EmailField(label=_("E-mail"))
 	password1 = forms.CharField(widget=forms.PasswordInput, label=_("Password"))
 	password2 = forms.CharField(widget=forms.PasswordInput, label=_("Password (again)"))
