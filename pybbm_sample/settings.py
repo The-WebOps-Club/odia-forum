@@ -95,6 +95,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
     'pybb.context_processors.processor',
+    'pybbm_sample.context_processors.site_url',
+    'pybbm_sample.context_processors.static_url',
 )
 
 TEMPLATE_LOADERS = (
