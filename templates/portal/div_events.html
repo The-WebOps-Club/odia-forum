@@ -1,18 +1,16 @@
-<html>
-	<body>
-		<table class='table table-bordered table-hover' id='table_events'>
-		{% for e in events %}
-		<tr>
-		<td><b> {{ e.name }} </b></td>
-		<td> {{ e.description }} </td>
-		<td> {{ e.date_time }} </td>
-		<td> {{ e.location }} </td>
-		<td>
-			<button class='btn btn-warning btn-xs' onclick="Dajaxice.portal.edit_event(Dajax.process, {'event_id': {{e.id }} })">Edit</button>
-			<button class='btn btn-danger btn-xs' onclick="if(confirm_deletion()) Dajaxice.portal.delete_event(Dajax.process, {'event_id': {{ e.id }} })">Delete</button>
-		</td>
-		</tr>
-		{% endfor %}
-		</table>
-	</body>
-</html>
+
+<table class='table table-bordered table-hover' id='table_events'>
+	{% for e in events %}
+	<tr>
+	<td><strong> {{ e.name }} </strong></td>
+	<td> {{ e.description }} </td>
+	<td> {{ e.date_time }} </td>
+	<td> {{ e.location }} </td>
+	<td>
+		<button class='btn btn-warning btn-xs' onclick="Dajaxice.portal.edit_event(Dajax.process, {'event_id': {{e.id }} })">Edit</button>
+		<button class='btn btn-danger btn-xs' onclick="if(confirm_deletion()) Dajaxice.portal.delete_event(Dajax.process, {'event_id': {{ e.id }} })">Delete</button>
+	</td>
+	</tr>
+	{% endfor %}
+</table>
+	

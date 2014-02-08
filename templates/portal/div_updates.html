@@ -1,17 +1,15 @@
-<html>
-	<body>
-		<table class='table table-bordered table-hover' id='table_updates'>
-		{% for e in updates %}
-		<tr>
-		<th> {{ e.title }} </th>
-		<td> {{ e.date_time }} </td>
-		<td> {{ e.update }} </td>
-		<td>
-			<button class='btn btn-warning btn-xs' onclick="Dajaxice.portal.edit_update(Dajax.process, {'update_id': {{e.id }} })">Edit</button>
-			<button class='btn btn-danger btn-xs' onclick="if(confirm_deletion()) Dajaxice.portal.delete_update(Dajax.process, {'update_id': {{ e.id }} })">Delete</button>
-		</td>
-		</tr>
-		{% endfor %}
-		</table>
-	</body>
-</html>
+
+<table class='table table-bordered table-hover' id='table_updates'>
+{% for e in updates %}
+<tr>
+<th> {{ e.title }} </th>
+<td> {{ e.date_time }} </td>
+<td> {{ e.update }} </td>
+<td>
+	<button class='btn btn-warning btn-xs' onclick="Dajaxice.portal.edit_update(Dajax.process, {'update_id': {{e.id }} })">Edit</button>
+	<button class='btn btn-danger btn-xs' onclick="if(confirm_deletion()) Dajaxice.portal.delete_update(Dajax.process, {'update_id': {{ e.id }} })">Delete</button>
+</td>
+</tr>
+{% endfor %}
+</table>
+	

@@ -1,10 +1,6 @@
 {% load staticfiles %}	
 	
-<html>
-
-<body> 
-	<div>
-	<form id='f1' >
+	<form id='f1' class="form form-horizontal">
 	{% csrf_token %}
 		<table>
 		    {{ add_event_form.as_table }}				
@@ -17,6 +13,3 @@
 		</tr>
 		</table>
 	</form>
-	
-</body>
-</html>
