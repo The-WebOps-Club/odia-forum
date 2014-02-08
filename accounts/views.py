@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.edit import UpdateView
-# Create your views here.
+
 
 from registration.backends.default.views import RegistrationView
 from accounts.forms import DetailForm
@@ -10,7 +10,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 
-# Create your models here.
+
 
 permission_lists = {'test':['pybb.add_post','pybb.view_post']}
 
@@ -26,9 +26,7 @@ class AccountRegistrationView(RegistrationView):
 	
 	
 	
-#class AccountActivationView(ActivationView):
-#	pass
-	
+
 class AccountEditView(UpdateView):
 
 	model = UserData
@@ -36,8 +34,8 @@ class AccountEditView(UpdateView):
 	template_name = "registration/registration-form.html"
 	
 	def dispatch(self, request, *args, **kwargs):
-		#if len(UserData.objects.filter(user=self.request.user)) == 0:
-		#	return 
+
+
 		
 		if not self.request.user.is_authenticated:
 			return redirect("accounts:login")
