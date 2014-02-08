@@ -4,7 +4,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 import datetime
 from django.contrib.auth.models import User
-
+from accounts.models import UserData
 groups = (
 ('1','Current Student/Faculty'),
 ('2','Verified Alumni'),
@@ -49,4 +49,17 @@ class DetailForm(forms.Form):
 	
 		return self.cleaned_data
 	# other details
-	
+
+class AccountEditForm(forms.ModelForm):
+	first_name = forms.CharField(label=_("First Name"),max_length = 30)
+	last_name = forms.CharField(label=_("Last Name"),max_length = 30)
+	class Meta:
+		model = UserData
+		fields = ['first_name','last_name','address', 'institute', 'hostel_bool', 'hostel','department','batchof','course']
+		
+	def save(self, *args, **kwargs):
+		obj = super(Beta,self).save(*args,**kwargs)
+		obj.user.first_name = self.cleaned_data["first_name"]
+		obj.user.last_name = self.cleaned_data["last_name"]
+		obj.user.save()
+		return obj
