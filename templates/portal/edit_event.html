@@ -1,8 +1,6 @@
 <form id='event_edit{{ id }}' class='form form-horizontal'>
 	{% csrf_token %}
-	{{ edit_event_form.as_table }}	     
-	<td>
+	{{ edit_event_form.as_table }}
 		<a class='btn btn-primary btn-xs' onclick="if(change_input()) Dajaxice.portal.save_edited_event(Dajax.process, {'form':$('#event_edit{{ id }}').serialize(true), 'event_id' : {{ id }} })" >Save</a>
 		<a onclick='cancel()' class='btn btn-danger btn-xs'>Cancel</a>
-	</td>	
 </form>

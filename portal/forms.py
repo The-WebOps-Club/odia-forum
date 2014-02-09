@@ -10,6 +10,7 @@ class AddEventForm(forms.ModelForm):
 	
 	class Meta:
 		model = Event
+		exclude = ('users', )
 
 class AddUpdateForm(forms.ModelForm):
 	

@@ -5,6 +5,7 @@ from portal.forms import *
 from django.template.context import RequestContext
 from dajaxice.utils import deserialize_form
 from models import *
+from accounts.models import UserData
 	
 @dajaxice_register
 def add_event(request):
@@ -15,7 +16,7 @@ def add_event(request):
 	dajax.assign('#add_event_form','innerHTML',html_add_event) 
 	dajax.script('change_type()')	
 	return dajax.json()
-
+	
 @dajaxice_register
 def save_event(request, form):
 	res = AddEventForm(deserialize_form(form))
@@ -123,7 +124,7 @@ def edit_update(request, update_id):
 	cont_dict = {'edit_update_form':form, 'id' : update.id }
 	html_add_update = render_to_string('portal/edit_update.html', cont_dict, RequestContext(request))
 	id = '#update'+str(update_id)
-	dajax.assign(id,'innerHTML','<div id="div"'+html_add_update)
+	dajax.assign(id,'innerHTML',+html_add_update)
 	dajax.script("$('#div_updates th').hide()")
 	return dajax.json()
 	
@@ -173,3 +174,13 @@ def reload_updates(dajax):
 	dajax.assign('#div_updates', 'innerHTML', html)
 	return dajax.json()
 
+@dajaxice_register
+def join_event(request, user_id, event_id):
+	user = UserData.objects.get(id=user_id)
+	event = Event.objects.get(id=event_id)
+	event.users.add(user)
+	event.save()
+	html2 = '<h6>Joined</h6>'
+	dajax = Dajax()
+	dajax.assign('#notif', 'innerHTML', html2)
+	return dajax.json()

@@ -17,6 +17,10 @@ var Dajaxice = {
         return Dajaxice.call('portal.reload_events', 'POST', callback_function, argv, custom_settings);
     },
 
+    join_event: function(callback_function, argv, custom_settings){
+        return Dajaxice.call('portal.join_event', 'POST', callback_function, argv, custom_settings);
+    },
+
     reload_updates: function(callback_function, argv, custom_settings){
         return Dajaxice.call('portal.reload_updates', 'POST', callback_function, argv, custom_settings);
     },
