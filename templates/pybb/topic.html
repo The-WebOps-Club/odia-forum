@@ -3,7 +3,7 @@
 {% load url from future %}
 
 {% load pybb_tags i18n %}
-
+{% load query %}
 {% block title %}{{ topic }}{% endblock %}
 
 {% block extra_script %}
@@ -28,7 +28,13 @@
         {% if topic.poll_type %}
             {% include 'pybb/poll.html' %}
         {% endif %}
-
+		{%query tags topic=topic as taglist%}
+			<div class='tags'>
+			Tags:
+			{%for i in taglist%}
+				{{i.label}},
+			{%endfor%}
+			</div>
         <div class="posts">
             {% if first_post %}{% ifnotequal first_post post_list.0 %}
                 {% with first_post as post %}

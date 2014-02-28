@@ -28,6 +28,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
 
 # Application definition
 
@@ -49,6 +50,7 @@ INSTALLED_APPS = (
     'portal',
     'dajax',
     'dajaxice',
+	'pybbm_tag',
 )
 
 MIDDLEWARE_CLASSES = (
