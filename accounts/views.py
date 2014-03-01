@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic.edit import UpdateView
 
 
-from registration.backends.default.views import RegistrationView
+from registration.backends.default.views import RegistrationView,ActivationView
 from accounts.forms import DetailForm,AccountEditForm
 from accounts.models import UserData
 from django.core.exceptions import PermissionDenied
@@ -20,12 +20,9 @@ class AccountRegistrationView(RegistrationView):
 		
 		user = super(AccountRegistrationView, self).register(request, **cleaned_data)
 		user.groups.add(cleaned_data['group'])
-		user_profile = UserData(user = user)
+		user_profile = UserData(user = user,email = user.email)
 		user_profile.save()
 		return user
-	
-	
-	
 
 class AccountEditView(UpdateView):
 
@@ -47,7 +44,7 @@ class AccountEditView(UpdateView):
 	
 	def get_context_data(self,**kwargs):
 		ctx = super(AccountEditView, self).get_context_data(**kwargs)
-		ctx["form"] = self.form_class(instance = UserData.objects.filter(user=self.request.user)[0],initial={"first_name":self.request.user.first_name,"last_name":self.request.user.last_name})
+		ctx["form"] = self.form_class(instance = UserData.objects.filter(user=self.request.user)[0],initial={"first_name":self.request.user.first_name,"last_name":self.request.user.last_name,"email":self.request.user.email})
 		return ctx
 		
 	pass;

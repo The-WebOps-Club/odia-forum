@@ -32,3 +32,4 @@ class UserData(models.Model):
 	batchof = models.CharField(choices = make_str(range(1955,datetime.datetime.now().year+1)),max_length=10)
 	graduation_date = models.DateField(default='2013-01-01')
 	course = models.CharField(choices = courses,max_length = 100)
+	email = models.EmailField()	# original email is stored here.
