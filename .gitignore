@@ -1,3 +1,4 @@
+db.sqlite3
 *.py[cod]
 
 # C extensions
@@ -20,3 +21,5 @@ nosetests.xml
 .pydevproject
 
 local_settings.py
+mydatabase
+mydatabase

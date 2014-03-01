@@ -1,6 +1,6 @@
 {% load url from future %}
 {% load i18n pybb_tags %}
-
+{% load query %}
 {% pybb_get_profile user=post.user as post_user_profile %}
 {% pybb_get_profile user=user as user_profile %}
 
@@ -65,7 +65,7 @@
             {% if post.updated %}
                 <div class="updated-message">{% trans "Edited" %} {% pybb_time post.updated %}</div>
             {% endif %}
-
+			
             {% comment %}
                     {% if post.attachment_cache %}
                     {% for attach in post.attachment_cache %}

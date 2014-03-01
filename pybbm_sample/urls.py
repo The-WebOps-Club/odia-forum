@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+	url(r'^forum/',include('pybbm_tag.urls', namespace='pybb_tag')),
     url(r'^forum/', include('pybb.urls', namespace='pybb')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^dashboard/', 'portal.views.dashboard'),

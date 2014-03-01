@@ -26,6 +26,9 @@
       {% include "pybb/poll_edit_form.html" %}
     {% endif %}
     {% include "pybb/attachments_formset.html" %}
+	{% if taglist_input%}
+	<input type='text' name="taglist" value="{{taglist_initial}}"></input>
+	{% endif %}
     <div class="form-group">{% include "pybb/_button_submit.html" %}</div>
   </fieldset>
 </form>

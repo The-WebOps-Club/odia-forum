@@ -1,5 +1,5 @@
 {% load i18n pybb_tags %}
-
+{% load query %}
 <table class="table table-bordered table-hover table-topic-list">
     <thead>
         <tr class="topic-row head-row">
@@ -15,6 +15,9 @@
             <th class="topic-last-post">
                 {% trans "Last post" %}
             </th>
+			<th class="topic-tags">
+				{% trans "Tags" %}
+			</th>
         </tr>
     </thead>
     <tbody>
@@ -52,6 +55,12 @@
             <td class="topic-last-post">
                 {% include "pybb/topic_last_message_info.html" %}
             </td>
+			<td class="topic-tags">
+				{%query tags topic=topic as taglist%}
+				{%for i in taglist%}
+					{{i.label}},
+				{%endfor%}
+			</td>
         </tr>
     {% endfor %}
     </tbody>

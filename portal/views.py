@@ -28,4 +28,4 @@ def events(request, event_id):
 		user = request.user
 	rc = {'event':even, 'user':user,}
 	return render_to_response('portal/event.html', rc)
-	#return HttpResponse('the event name is %s' % event.name)
+
