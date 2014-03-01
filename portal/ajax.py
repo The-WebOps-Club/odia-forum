@@ -5,26 +5,34 @@ from portal.forms import *
 from django.template.context import RequestContext
 from dajaxice.utils import deserialize_form
 from models import *
-from accounts.models import UserData
+from accounts.models import UserData, institutes_list
+from portal.mail import mail,make_list
+from django.core.mail import EmailMultiAlternatives
+from django.template import Context
+from local_settings import SITE_URL
 	
 @dajaxice_register
 def add_event(request):
 	dajax = Dajax()
 	form_add_event = AddEventForm()
-	cont_dict = {'add_event_form':form_add_event}
+	cont_dict = {'add_event_form':form_add_event, 'mail_list': institutes_list}
 	html_add_event = render_to_string('portal/add_event.html', cont_dict, RequestContext(request))
-	dajax.assign('#add_event_form','innerHTML',html_add_event) 
-	dajax.script('change_type()')	
+	dajax.assign('#add_event','innerHTML',html_add_event)
+	dajax.assign('#add_event','innerHTML',html_add_event) 
+	dajax.script('change_type()')
+	dajax.script('change_select()')	
 	return dajax.json()
-	
+
 @dajaxice_register
-def save_event(request, form):
+def save_event(request, form, insti, type):
 	res = AddEventForm(deserialize_form(form))
 	dajax = Dajax()
 	if res is None or not res.is_valid():
-		cont_dict = {'add_event_form':res}
+		cont_dict = {'add_event_form':res,'mail_list':institutes_list,}
 		html_add_event = render_to_string('portal/add_event.html', cont_dict, RequestContext(request))
 		dajax.assign('#add_event','innerHTML',html_add_event)
+		dajax.script('change_input_back()')
+		dajax.script('change_select()')
 		return dajax.json()		
 	nam = res.cleaned_data['name']	
 	des = res.cleaned_data['description']
@@ -33,9 +41,40 @@ def save_event(request, form):
 	new_event = Event(name = nam, description = des, date_time = dat, location = loc)
 	new_event.save()
 	success_html = '<h6>added event successfully</h6>'
-	dajax.assign('#event_notif', 'innerHTML', success_html)
-	dajax.script("$('#f1')[0].reset()")
+	dajax.assign('#add_event', 'innerHTML', success_html)
+	
+	if insti== 'All':
+		iit = 'all'
+	else:
+		iit = []
+		for i in insti:
+			iit.append(i)
+		
+	if type == 'All':
+		category = 'all'
+	else:
+		category = []
+		for t in type:
+			category.append(t)
+	
+	subject = nam
+	link = SITE_URL+'events/'+str(new_event.id)
+	c = Context({'event':new_event,'link':link,})
+	message = render_to_string('portal/add_event_mail.html', c)
+	to = make_list(category, iit)
+	text = 'Hey, checkout our new event: '+nam+'\nWhen: '+str(dat)+'\nWhere: '+loc+'\n'+des+'\nJoin the event here: '+link
+	email = EmailMultiAlternatives(subject,text,DEFAULT_FROM_EMAIL,to)
+	email.attach_alternative(message, 'text/html')
+	email.send()
 	return reload_events(dajax)
+	
+@dajaxice_register
+def test(request):
+	print 'test running'
+	dajax = Dajax()
+	test_html = '<h2>This is a</h2><h4> test message</h4>'
+	dajax.assign('#add_event', 'innerHTML', test_html)
+	return dajax.json()
 	
 @dajaxice_register
 def delete_event(request, event_id):
@@ -53,9 +92,8 @@ def edit_event(request, event_id):
 	form = AddEventForm(instance = event)
 	cont_dict = {'edit_event_form':form, 'id' : event.id }
 	html_add_event = render_to_string('portal/edit_event.html', cont_dict, RequestContext(request))
-	id = '#event'+str(event_id)
-	dajax.assign(id,'innerHTML',html_add_event)
-	dajax.script("$('#div_events th').hide()")
+	dajax.assign('#add_event','innerHTML',html_add_event)
+	dajax.script('change_editform()')
 	return dajax.json()
 	
 @dajaxice_register
@@ -65,8 +103,7 @@ def save_edited_event(request, form, event_id):
 	if res is None or not res.is_valid():
 		cont_dict = {'edit_event_form':res}
 		html_add_event = render_to_string('portal/edit_event.html', cont_dict, RequestContext(request))
-		id = '#event'+str(event_id)
-		dajax.assign(id,'innerHTML',html_add_event)
+		dajax.assign('#add_event','innerHTML',html_add_event)
 		return dajax.json()		
 	event = Event.objects.get(id = event_id)
 	event.name = res.cleaned_data['name']	
@@ -75,7 +112,7 @@ def save_edited_event(request, form, event_id):
 	event.location = res.cleaned_data['location']
 	event.save()
 	success_html = '<h6>event edited</h6>'
-	dajax.assign('#event_notif', 'innerHTML', success_html)
+	dajax.assign('#add_event', 'innerHTML', success_html)
 	return reload_events(dajax)
 	
 @dajaxice_register
@@ -84,8 +121,8 @@ def add_update(request):
 	form_add_update = AddUpdateForm()
 	cont_dict = {'add_update_form':form_add_update}
 	html_add_update = render_to_string('portal/add_update.html', cont_dict, RequestContext(request))
-	dajax.assign('#add_update_form','innerHTML',html_add_update)
-	dajax.script('change_type()')
+	dajax.assign('#add_event','innerHTML',html_add_update)
+	dajax.script('change_editform()')
 	return dajax.json()
 	
 @dajaxice_register
@@ -95,7 +132,7 @@ def save_update(request, form):
 	if res is None or not res.is_valid():
 		cont_dict = {'add_update_form':res}
 		html_add_update = render_to_string('portal/add_update.html', cont_dict, RequestContext(request))
-		dajax.assign('#add_update_form','innerHTML',html_add_update)
+		dajax.assign('#add_event','innerHTML',html_add_update)
 		return dajax.json()		
 	til = res.cleaned_data['title']
 	dat = res.cleaned_data['date_time']
@@ -103,8 +140,7 @@ def save_update(request, form):
 	new_update = Update(title = til,date_time = dat, update = upd)
 	new_update.save()
 	success_html = '<h6>added update successfully</h6>'
-	dajax.assign('#update_notif', 'innerHTML', success_html)
-	dajax.script("$('#f2')[0].reset()")
+	dajax.assign('#add_event', 'innerHTML', success_html)
 	return reload_updates(dajax)
 	
 @dajaxice_register
@@ -123,9 +159,8 @@ def edit_update(request, update_id):
 	form = AddUpdateForm(instance = update)
 	cont_dict = {'edit_update_form':form, 'id' : update.id }
 	html_add_update = render_to_string('portal/edit_update.html', cont_dict, RequestContext(request))
-	id = '#update'+str(update_id)
-	dajax.assign(id,'innerHTML',+html_add_update)
-	dajax.script("$('#div_updates th').hide()")
+	dajax.assign('#add_event','innerHTML',html_add_update)
+	dajax.script('change_editform()')
 	return dajax.json()
 	
 @dajaxice_register
@@ -176,7 +211,8 @@ def reload_updates(dajax):
 
 @dajaxice_register
 def join_event(request, user_id, event_id):
-	user = UserData.objects.get(id=user_id)
+	print 'hi'
+	user = UserData.objects.get(user__id=user_id)
 	event = Event.objects.get(id=event_id)
 	event.users.add(user)
 	event.save()

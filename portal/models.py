@@ -15,7 +15,7 @@ class Event(models.Model):
 class Update(models.Model):
 	title = models.CharField(max_length=30)
 	date_time = models.DateTimeField('Date, time')
-	update = models.CharField(max_length=50)
+	update = models.TextField(max_length=50)
 	
 	def __unicode__(self):
 		return self.title

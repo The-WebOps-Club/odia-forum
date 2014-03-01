@@ -1,8 +1,37 @@
 {% load staticfiles %}	
-	
+
+<table>	
 	<form id='f1' class="form form-horizontal">
 	{% csrf_token %}
-		    {{ add_event_form.as_table }}				
-			<a class='btn btn-primary btn-xs' onclick="if(change_input()) Dajaxice.portal.save_event(Dajax.process, {'form':$('#f1').serialize(true)})" >Save</a>
-			<a onclick='cancel()' class='btn btn-danger btn-xs'>Cancel</a>
+		    {{ add_event_form.as_table }}
+			<tr>
+				<th>Send notification mail to:</th>
+			</tr>
+			<tr>
+			<td>
+				<select multiple id="insti" name="insti">
+					<option>All</option>
+					{% for iit in mail_list %}
+					<option value="{{ iit }}">{{iit}}</option>
+					{% endfor %}
+				</select>
+			</td>
+			<td>
+				<select multiple id="type" name="type">
+					<option>All</option>
+					<option>General</option>
+					<option>Current Student/Faculty</option>
+					<option>Alumnus</option>
+					<option>Verified Alumnus</option>
+				</select>
+			</td>
+			</tr>
+			<tr>
+			<th></th>
+			<td>
+				<a class='btn btn-primary btn-xs' onclick="if(change_input()) Dajaxice.portal.save_event(Dajax.process, {'form':$('#f1').serialize(true),'insti':$('#insti').val(),'type':$('#type').val(),})" >Save</a>
+				<a onclick='cancel()' class='btn btn-danger btn-xs'>Cancel</a>
+			</td>
+			</tr>
 	</form>
+</table>

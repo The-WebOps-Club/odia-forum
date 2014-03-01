@@ -6,10 +6,8 @@
 	<head>
 		<title> {% block title %} {% endblock %} </title>
 		<script type='text/javascript' src= {% static 'jquery.dajax.core.js' %} ></script>
-		<script type='text/javascript' src= {% static 'select2/select2.js' %} ></script>
 		<script type='text/javascript' src= {% static 'jquery-1.11.0.min.js' %} ></script>
 		<link rel='stylesheet' type='text/css' href = {% static 'bootstrap/css/bootstrap.min.css' %}>
-		<link rel='stylesheet' type='text/css' href = {% static 'select2/select2.css' %}>
 		<script type='text/javascript' src= {% static 'bootstrap/js/bootstrap.min.js' %} ></script>
 		<style> {% block style %} {% endblock %} </style>
 		<script> {% block script %} {% endblock %} </script>
@@ -17,12 +15,6 @@
 	</head>
 	
 	<body>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					{% block body %} {% endblock %}
-				</div>
-			</div>
-		</div>
+		{% block body %} {% endblock %}
 	</body>
 <html>
