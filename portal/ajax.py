@@ -63,7 +63,7 @@ def save_event(request, form, insti, type):
 	message = render_to_string('portal/add_event_mail.html', c)
 	to = make_list(category, iit)
 	text = 'Hey, checkout our new event: '+nam+'\nWhen: '+str(dat)+'\nWhere: '+loc+'\n'+des+'\nJoin the event here: '+link
-	email = EmailMultiAlternatives(subject,text,DEFAULT_FROM_EMAIL,to)
+	email = EmailMultiAlternatives(subject,text,settings.DEFAULT_FROM_EMAIL,to)
 	email.attach_alternative(message, 'text/html')
 	email.send()
 	return reload_events(dajax)
