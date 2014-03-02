@@ -9,7 +9,7 @@ from accounts.models import UserData, institutes_list
 from portal.mail import mail,make_list
 from django.core.mail import EmailMultiAlternatives
 from django.template import Context
-from local_settings import SITE_URL
+from django.conf import settings
 	
 @dajaxice_register
 def add_event(request):
@@ -43,14 +43,14 @@ def save_event(request, form, insti, type):
 	success_html = '<h6>added event successfully</h6>'
 	dajax.assign('#add_event', 'innerHTML', success_html)
 	
-	if insti== 'All':
+	if 'All' in insti:
 		iit = 'all'
 	else:
 		iit = []
 		for i in insti:
 			iit.append(i)
 		
-	if type == 'All':
+	if 'All' in type:
 		category = 'all'
 	else:
 		category = []
@@ -58,7 +58,7 @@ def save_event(request, form, insti, type):
 			category.append(t)
 	
 	subject = nam
-	link = SITE_URL+'events/'+str(new_event.id)
+	link = settings.SITE_URL+'events/'+str(new_event.id)
 	c = Context({'event':new_event,'link':link,})
 	message = render_to_string('portal/add_event_mail.html', c)
 	to = make_list(category, iit)

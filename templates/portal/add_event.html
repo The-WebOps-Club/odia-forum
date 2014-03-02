@@ -9,21 +9,25 @@
 			</tr>
 			<tr>
 			<td>
-				<select multiple id="insti" name="insti">
+			<div id='select2_container_1' style='width:300px'>
+				<select multiple id="insti" name="insti" style='width:300px'>
 					<option>All</option>
 					{% for iit in mail_list %}
 					<option value="{{ iit }}">{{iit}}</option>
 					{% endfor %}
 				</select>
+			</div>
 			</td>
 			<td>
-				<select multiple id="type" name="type">
+			<div id='select2_container_2' style='width:200px'>
+				<select multiple id="type" name="type" style='width:250px'>
 					<option>All</option>
 					<option>General</option>
 					<option>Current Student/Faculty</option>
 					<option>Alumnus</option>
 					<option>Verified Alumnus</option>
 				</select>
+			</div>
 			</td>
 			</tr>
 			<tr>
