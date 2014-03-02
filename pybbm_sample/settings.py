@@ -113,7 +113,7 @@ STATICFILES_FINDERS = (
     'dajaxice.finders.DajaxiceFinder',
 )
 
-DAJAXICE_MEDIA_PREFIX = 'dajaxice'
+DAJAXICE_MEDIA_PREFIX = 'odia/dajaxice'
 
 
 TEMPLATE_DIRS = (
@@ -121,10 +121,10 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(BASE_DIR,'templates'),
-    '/usr/lib/python2.6/site-packages/django/contrib/admin/static',
+    # '/usr/lib/python2.6/site-packages/django/contrib/admin/static',
 )
 
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+ADMIN_MEDIA_PREFIX = SITE_URL + 'static/admin/'
 
 ACCOUNT_ACTIVATION_DAYS = 1
 
