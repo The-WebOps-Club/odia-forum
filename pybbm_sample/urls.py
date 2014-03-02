@@ -18,7 +18,8 @@ urlpatterns = patterns('',
     url(r'^dashboard/', 'portal.views.dashboard'),
     url(r'^$', 'portal.views.index'),
 	url(r'^events/(?P<event_id>\d+)/','portal.views.events'),
-    url(r'^%s/' % settings.DAJAXICE_MEDIA_PREFIX, include('dajaxice.urls')),
+    url(r'^dajaxice/',include('dajaxice.urls')),
+    url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
 
 )
 
