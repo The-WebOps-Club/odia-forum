@@ -46,6 +46,7 @@
 	</div>
 	<div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
+	    	<li><a href="/"><span class="glyphicon glyphicon-home"></span> Main Home</a></li>
                 {% if request.user.is_authenticated %}
                     <li>
                         <a href="{% url 'pybb:edit_profile' %}">Profile [logged as {{ request.user.username }}]</a>
@@ -67,9 +68,6 @@
                         <a href="{% url 'registration_register' %}">Register</a>
                     </li>
                 {% endif %}
-                <li><a href="http://github.com/hovel/pybbm">Code</a></li>
-                <li><a href="http://pypi.python.org/pypi/pybbm">Download</a></li>
-                <li><a href="http://readthedocs.org/docs/pybbm/en/latest/">Documentation</a></li>
             </ul>
         </div>
     </div>
