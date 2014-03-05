@@ -5,17 +5,30 @@
 	{% dajaxice_js_import %}
 {% endblock %}
 {% block title %}Events{% endblock %}
+{% block script %}
+    var joined = {{ joined }};
+	if(joined == 1) {
+		$(document).ready(function() { $('#join').hide()});
+	}
+	else {
+		$(document).ready(function() { $('#leave').hide(); $('#number').hide()});
+	}
+{% endblock %}
 
 {% block body %}
 	<h1>{{ event.name }} </h1>
 	<p>{{ event.description }}</p>
 	<p><strong>When:</strong> {{ event.date_time }}</p>
-	<p><strong>Where:</strong> {{ event.location }}	</p>	
-	<button class='btn btn-primary btn-xs' onclick="Dajaxice.portal.join_event(Dajax.process, {'user_id': {{ user.id }} , 'event_id': {{ event.id }} })" >Join</button>
-	<br>
-	<strong>Those showing up: </strong>{% for e in event.users.all %}{{e.user.get_full_name}}, {% endfor %}
-	<br>	
+	<p><strong>Where:</strong> {{ event.location }}	</p>
+	{% if user.is_authenticated %}
+	<p>
+	<button id='join' class='btn btn-primary btn-xs' onclick="Dajaxice.portal.join_event(Dajax.process, {'user_id': {{ user.id }} , 'event_id': {{ event.id }} })" >Join</button>
+	<button id='leave' class='btn btn-warning btn-xs' onclick="Dajaxice.portal.leave_event(Dajax.process, {'user_id': {{ user.id }} , 'event_id': {{ event.id }} })" >Leave</button>
+	</p>
+	{% endif %}
+	<span id='number'>You and </span>{{num}} other(s) are going 
 	<div id='notif' style='color:red'></div>
+	
 {% endblock %}
 
 <!--Dajaxice.portal.add_user(Dajax.process, {'user_id': {{ user.id }} , 'event_id': {{ event.id }} })-->

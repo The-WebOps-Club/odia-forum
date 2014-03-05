@@ -16,3 +16,8 @@ class AddUpdateForm(forms.ModelForm):
 	
 	class Meta:
 		model = Update
+		
+class HomepageForm(forms.ModelForm):
+	
+	class Meta:
+		model = Homepage

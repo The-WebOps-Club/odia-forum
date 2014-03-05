@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import UserData
+from accounts.models import UserData,institutes
 
 class Event(models.Model):
 	name = models.CharField(max_length=30)
@@ -20,3 +20,10 @@ class Update(models.Model):
 	def __unicode__(self):
 		return self.title
 		
+class Homepage(models.Model):
+	institute = models.CharField(choices = institutes, max_length=50)
+	description = models.TextField(max_length=200)
+	image = models.ImageField(upload_to='media/homepages/')
+	
+	def __unicode__(self):
+		return self.institute

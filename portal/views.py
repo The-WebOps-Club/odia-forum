@@ -21,11 +21,34 @@ def index(request):
 	else:
 		return HttpResponseRedirect('forum/')
 
-@login_required		
 def events(request, event_id):
 	even = Event.objects.get(id = event_id)
-	if request.user.is_authenticated:
-		user = request.user
-	rc = {'event':even, 'user':user,}
+	all_users = even.users.all()
+	if request.user.is_authenticated():
+		user = request.user	
+		data = UserData.objects.get(user = user)
+		if data in even.users.all():
+			joined = 1
+		else:
+			joined = 0
+		num = len(all_users) - joined	
+		rc = {'event':even, 'user':user, 'joined':joined, 'num':num}
+	else:
+		num = len(all_users)
+		joined = 0
+		rc = {'event':even, 'joined':joined, 'num':num,}
 	return render_to_response('portal/event.html', rc)
 
+def homepage(request, insti):
+	insti = insti.capitalize()
+	homepage = Homepage.objects.get(institute = insti)
+	cont = {'homepage':homepage}
+	return render_to_response('portal/homepage.html', cont)
+	
+def homepage_admin(request, insti):
+	if request.user.username != insti+'_admin' and not request.user.is_superuser:
+		return HttpResponseRedirect('/home/'+insti)
+	insti = insti.capitalize()
+	homepage = Homepage.objects.get(institute = insti)
+	cont = {'homepage':homepage}
+	return render_to_response('portal/homepage_admin.html',cont)

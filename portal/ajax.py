@@ -211,7 +211,6 @@ def reload_updates(dajax):
 
 @dajaxice_register
 def join_event(request, user_id, event_id):
-	print 'hi'
 	user = UserData.objects.get(user__id=user_id)
 	event = Event.objects.get(id=event_id)
 	event.users.add(user)
@@ -219,4 +218,18 @@ def join_event(request, user_id, event_id):
 	html2 = '<h6>Joined</h6>'
 	dajax = Dajax()
 	dajax.assign('#notif', 'innerHTML', html2)
+	dajax.script('$("#join").hide();$("#number").show();')
+	dajax.script('$("#leave").show();')
+	return dajax.json()
+
+@dajaxice_register
+def leave_event(request, user_id, event_id):
+	user = UserData.objects.get(user__id=user_id)
+	event = Event.objects.get(id=event_id)
+	event.users.remove(user)
+	html = '<h6>Unjoined Event</h6>'
+	dajax = Dajax()
+	dajax.assign('#notif', 'innerHTML', html)
+	dajax.script('$("#join").show();')
+	dajax.script('$("#leave").hide();$("#number").hide();')
 	return dajax.json()

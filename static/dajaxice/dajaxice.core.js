@@ -53,6 +53,10 @@ var Dajaxice = {
         return Dajaxice.call('portal.delete_update', 'POST', callback_function, argv, custom_settings);
     },
 
+    leave_event: function(callback_function, argv, custom_settings){
+        return Dajaxice.call('portal.leave_event', 'POST', callback_function, argv, custom_settings);
+    },
+
     test: function(callback_function, argv, custom_settings){
         return Dajaxice.call('portal.test', 'POST', callback_function, argv, custom_settings);
     },
