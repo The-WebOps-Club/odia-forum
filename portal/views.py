@@ -19,7 +19,7 @@ def index(request):
 	if request.user.is_staff:
 		return dashboard(request)
 	else:
-		return HttpResponseRedirect('forum/')
+		return render_to_response('home.html')
 
 def events(request, event_id):
 	even = Event.objects.get(id = event_id)
