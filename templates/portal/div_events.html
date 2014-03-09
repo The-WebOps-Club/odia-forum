@@ -1,5 +1,12 @@
 
 <table class='table table-bordered table-hover' id='table_events'>
+	<tr>
+		<td>Event Name</td>
+		<td>Description</td>
+		<td>Date &amp; Time</td>
+		<td>Location</td>
+		<td>Options</td>
+	</tr>
 	{% for e in events %}
 	<tr id='event{{e.id}}'>
 	<td><strong> {{ e.name }} </strong></td>

@@ -8,19 +8,11 @@
 		{% endblock %}
 		
 		{% block style %}
-			#add_event {
-				position:fixed;
-				top:10px;
-				right:100px;
-				background-color:pink;
-			}
 			#add_event #submit {
 				float:right;
 				margin:5px;
+				margin-top: 10px;
 			}			
-			#add_event div {
-				padding:5px;
-			}
 		{% endblock %}
 		
 		{% block script %}
@@ -73,17 +65,19 @@
 			
 		{% endblock %}	
 	{% block body %}
+		<div class="col-md-9">
 		<h3>EVENTS</h3>
 		<div id='div_events'>
 		</div>
-		<button onclick='Dajaxice.portal.add_event(Dajax.process)'>Add Event</button>
-		<div id='add_event'></div>
+		<button class="btn btn-primary btn-sm" onclick='Dajaxice.portal.add_event(Dajax.process)'>Add Event</button>
 		
 		<h3>UPDATES</h3>
 		<div id='div_updates'>
 		</div>
 		
-		<button onclick='Dajaxice.portal.add_update(Dajax.process)'>Add Update</button>
+		<button class="btn btn-primary btn-sm" onclick='Dajaxice.portal.add_update(Dajax.process)'>Add Update</button>
+		</div>
+		<div id='add_event' class="col-md-3"></div>
 	{% endblock %}
 		
 		

@@ -6,18 +6,19 @@
 		    {{ add_event_form.as_table }}
 			<tr>
 				<th>Send notification mail to:</th>
-			</tr>
-			<tr>
-			<td>
-			<div id='select2_container_1' style='width:300px'>
-				<select multiple id="insti" name="insti" style='width:300px'>
+				<td>
+				<div id='select2_container_1' style='width:200px'>
+				<select multiple id="insti" name="insti" style='width:250px'>
 					<option>All</option>
 					{% for iit in mail_list %}
 					<option value="{{ iit }}">{{iit}}</option>
 					{% endfor %}
 				</select>
-			</div>
-			</td>
+				</div>
+				</td>
+			</tr>
+			<tr>
+			<td></td>
 			<td>
 			<div id='select2_container_2' style='width:200px'>
 				<select multiple id="type" name="type" style='width:250px'>
