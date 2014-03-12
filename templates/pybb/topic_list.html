@@ -1,6 +1,6 @@
 {% load i18n pybb_tags %}
 {% load query %}
-<table class="table table-bordered table-hover table-topic-list">
+<table class="table table-bordered table-hover table-topic-list" id="forum-table">
     <thead>
         <tr class="topic-row head-row">
             <th class="topic-name">
@@ -58,7 +58,7 @@
 			<td class="topic-tags">
 				{%query tags topic=topic as taglist%}
 				{%for i in taglist%}
-					{{i.label}},
+					<span class="badge badge-info"> {{i.label}} </span>
 				{%endfor%}
 			</td>
         </tr>
