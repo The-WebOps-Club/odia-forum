@@ -16,10 +16,11 @@ def dashboard(request):
 	return render_to_response('portal/dashboard.html', rc)
 
 def index(request):
+	# assert False
 	if request.user.is_staff:
 		return dashboard(request)
 	else:
-		return render_to_response('home.html')
+		return render_to_response('home.html', locals(), context_instance = RequestContext(request))
 
 def events(request, event_id):
 	even = Event.objects.get(id = event_id)

@@ -46,11 +46,11 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'south',
     'pure_pagination',
-	'accounts',
+    'accounts',
     'portal',
     'dajax',
     'dajaxice',
-	'pybbm_tag',
+    'pybbm_tag',
 )
 
 MIDDLEWARE_CLASSES = (
