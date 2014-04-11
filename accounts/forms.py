@@ -34,6 +34,10 @@ class DetailForm(forms.Form):
 	password2 = forms.CharField(widget=forms.PasswordInput, label=_("Password (again)"))
 	group = forms.ChoiceField(label = _("Category"), choices = groups, required = 'true')
 
+	def __init__(self,*args,**kwargs):
+		super(DetailForm, self).__init__(*args,**kwargs)
+		self.fields['email'].widget.attrs['class'] = 'form-control'	# for some reason email-field doesn't automatically set it's class to form-control.
+
 	def clean_username(self):
 		if(User.objects.filter(username=self.cleaned_data['username']).count() != 0):
 			raise forms.ValidationError(_("Duplicate User IDs"))

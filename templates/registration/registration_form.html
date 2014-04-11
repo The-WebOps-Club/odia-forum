@@ -6,11 +6,16 @@
 
 
 {% block content %}
-
+<!-- Registration-form.html -->
     <h2>Register</h2>
 
     <form action='' method=POST class="form horizontal">
-    {{ form.as_p }}
+    {%for field in form.visible_fields%}
+    <p>
+    	{{field.errors}}
+    	{{field.label_tag}} {{field}}
+    </p>
+    {%endfor%}
     {% csrf_token %}
 	<input class="btn btn-primary" type=submit>
     </form>
